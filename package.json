@@ -1,0 +1,24 @@
+{
+    "name": "youtube_video_player_clone",
+    "version": "1.0.0",
+    "description": "youtube_video_player_clone",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "scss": "node-sass --watch index.scss -o stylesheets/"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/anthonytranDev/youtube_video_player_clone.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/anthonytranDev/youtube_video_player_clone/issues"
+    },
+    "homepage": "https://github.com/anthonytranDev/youtube_video_player_clone#readme",
+    "dependencies": {
+        "node-sass": "^4.5.3"
+    }
+}
