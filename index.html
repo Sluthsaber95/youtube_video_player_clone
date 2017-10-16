@@ -6,6 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./stylesheets/index.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 </head>
 
 <body>
@@ -51,22 +52,29 @@
                 <div class="empty-btn"></div>
             </div>
             <!-- volume-scrubber -->
-            <div class="casing-volume" id="volume-scrub">
-                <div class="slidershell" id="volume-shell">
+            <section class="casing-volume" id="volume-scrub">
+                <article class="slidershell" id="volume-shell">
                     <progress class="bar" id="volume-bar" value="0" max="100"></progress>
                     <div class="sliderfill" id="volume-fill"></div>
                     <div class="sliderthumb" id="volume-thumb"></div>
                     <input class="slider-vertical" id="volume-slider" type="range" min="0" max="100" value="0" oninput="showVolumeValue(value, false);" onchange="showVolumeValue(value, false);" />
-                </div>
-            </div>
-            <div class="empty-space"></div>
-            <div class="screening-controls">
-                <img id="setting-btn" class="controls" src="C:\Users\Anthony\Desktop\web_dev_projects\youtube_video_player_clone\assets\settings.png" alt="setting button">
+                </article>
+            </section>
+            <section id="playback-time" class="playback-time">
+                <h5>2:15/3:00</h5>
+            </section>
+            <section class="empty-space"></section>
+            <section class="screening-controls">
+                <section class="test-settings">
+                    <button id="settings-btn" class="controls">
+                        <img id="settings" src="./assets/settings.png" alt="">
+                    </button>
+                </section>
                 <img id="cinemamode-btn" class="controls" src="C:\Users\Anthony\Desktop\web_dev_projects\youtube_video_player_clone\assets\cinemamode.png" alt="largescreen button">
                 <button type="button" id="full-screen">
                     <img id="fullscreen-btn" class="controls" src="C:\Users\Anthony\Desktop\web_dev_projects\youtube_video_player_clone\assets\fullscreen.png" alt="fullscreen button">
                 </button>
-            </div>
+            </section>
         </div>
     </div>
 </body>

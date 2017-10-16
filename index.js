@@ -1,3 +1,63 @@
+// style was needed to be an IIFE so that it can be attached to head, else be undefined;
+const style = (function() {
+    var style = document.createElement("style");
+
+    // WebKit hack
+    style.appendChild(document.createTextNode(""));
+
+    // Add the <style> element to the page
+    document.head.appendChild(style);
+
+    return style;
+})();
+
+const rules = [
+    `
+@keyframes slideScrub {
+    from {
+        width: 60px;
+    }
+    to {
+        width: 0px;
+    }
+}
+`, `
+@keyframes slideBar {
+    from {
+        left: 4px;
+        width: 0px;
+    }
+    to {
+        width: 48px;
+    }
+}
+`, `
+@keyframes slideFill {
+    from {
+        left: 4px;
+        width: 0px;
+    }
+    to {
+        width: 544px;
+    }
+}
+`,
+    `
+@keyframes slideLeftThumb {
+    from {
+        left: 0px;
+    }
+    to {
+        left: 48px;
+    }
+}
+`
+];
+
+for (let i = 0; i < rules.length; i++) {
+    style.sheet.insertRule(rules[i], i);
+}
+
 const blackArea = document.getElementById("black-area");
 const triangleTop = document.getElementById("triangle-descend");
 const triangleBottom = document.getElementById("triangle-ascend");
@@ -77,8 +137,6 @@ videoControls.addEventListener("mouseover", () => {
     progressBar.style.animation = `${transitionSpeed}s shortenScrub`;
     thumb.style.animation = `${transitionSpeed}s disappearThumb`;
 
-
-
     setTimeout(() => {
         // which will become
 
@@ -95,22 +153,6 @@ videoControls.addEventListener("mouseover", () => {
         fill.style.opacity = 1;
     }, 200);
 });
-
-wrapper.addEventListener("mouseover",
-    () => {
-        const transitionSpeed = 0.15;
-        if (thumb.style.opacity === "1") {
-            thumb.style.animation = `${transitionSpeed}s fadeout`;
-            progressBar.style.animation = `${transitionSpeed}s fadeout`;
-            fill.style.animation = `${transitionSpeed}s fadeout`;
-        }
-        setTimeout(() => {
-            thumb.style.opacity = 0;
-            progressBar.style.opacity = 0;
-            fill.style.opacity = 0;
-        }, 150);
-    }
-);
 
 function showValue(val, vertical) {
     /* setup variables for the elements of our slider */
@@ -157,6 +199,7 @@ const silenceSlide = document.getElementById("silence-pane");
 const volumeFill = document.getElementById("volume-fill");
 const volumeSlider = document.getElementById("volume-slider");
 const volumeThumb = document.getElementById("volume-thumb");
+const volumeScrub = document.getElementById("volume-scrub");
 let volumeValue = NaN;
 let silent = false;
 
@@ -194,6 +237,7 @@ silenceSlide.addEventListener("click", () => {
 });
 
 silence.addEventListener("click", () => {
+
     const transitionSpeed = 0.2;
     if (silenceSlide.style.width === "0px" || silenceSlide.style.width === "") {
         silenceSlide.style.animation = `${transitionSpeed}s diagonalslideout`;
@@ -226,28 +270,134 @@ silence.addEventListener("click", () => {
 
 const volumeShell = document.getElementById("volume-shell");
 const volumeBar = document.getElementById("volume-bar");
-
-
 silence.addEventListener("mouseover", () => {
-    const transitionSpeed = 0.15;
-    volumeFill.style.opacity = 1;
-    volumeBar.style.opacity = 1;
-    volumeThumb.style.opacity = 1;
+
+    const scrubWidth = 60;
+    const barWidth = 60;
+    const thumbLeft = (54 / 100) * volumeValue;
+    const fillWidth = (60 / 100) * volumeValue;
+
+    const rules = [
+        `
+    @keyframes slideScrub {
+        from {
+            width: ${scrubWidth}px;
+        }
+        to {
+            width: 0px;
+        }
+    }
+    `, `
+    @keyframes slideBar {
+        from {
+            left: 4px;
+            width: 0px;
+        }
+        to {
+            width: ${barWidth}px;
+        }
+    }
+    `, `
+    @keyframes slideFill {
+        from {
+            left: 4px;
+            width: 0px;
+        }
+        to {
+            width: ${fillWidth}px;
+        }
+    }
+    `,
+        `
+    @keyframes slideLeftThumb {
+        from {
+            left: 0px;
+        }
+        to {
+            left: ${thumbLeft}px;
+        }
+    }
+    `
+    ];
+
+    // A hack to dynamically change the position of volume Scrubber
+    // remove when a better solution is found
+    const promise = new Promise((resolve, reject) => {
+        if (style.sheet.cssRules.length) {
+            console.log(style.sheet.cssRules.length);
+            return resolve();
+        }
+    });
+
+    promise
+        .then(() => {
+            for (let i = 0; i < rules.length - 2; i++) {
+                style.sheet.deleteRule(i);
+            }
+            style.sheet.deleteRule(0);
+
+        }).then(() => {
+            style.sheet.deleteRule(0);
+        })
+        .then(() => {
+            for (let i = 0; i < rules.length; i++) {
+                style.sheet.insertRule(rules[i], i);
+            }
+        });
+
+
+    if (volumeScrub.style.width === "0px" || volumeScrub.style.width === "") {
+        const transitionSpeed = 0.05;
+        volumeFill.style.opacity = 1;
+        volumeBar.style.opacity = 1;
+        volumeFill.style.animation = `${transitionSpeed}s ease-in-out slideFill`;
+        volumeBar.style.animation = `${transitionSpeed}s ease-in-out slideBar`;
+        volumeThumb.style.animation = `${transitionSpeed}s ease-in-out slideLeftThumb`;
+        volumeScrub.style.animation = `${transitionSpeed}s ease-in-out slideScrub reverse`;
+
+        setTimeout(() => {
+            volumeThumb.style.opacity = 1;
+            volumeFill.style.animation = "";
+            volumeThumb.style.animation = "";
+            volumeScrub.style.animation = "";
+            volumeBar.style.animation = "";
+
+            volumeScrub.style.width = 60 + "px";
+            volumeBar.style.width = 60 + "px";
+            volumeThumb.style.left = thumbLeft + "px";
+            volumeFill.style.width = fillWidth + "px";
+        }, transitionSpeed * 1000)
+    }
 });
 
 wrapper.addEventListener("mouseover",
     () => {
-        const transitionSpeed = 0.15;
-        if (volumeThumb.style.opacity === "1") {
-            volumeThumb.style.animation = `${transitionSpeed}s fadeout`;
-            volumeBar.style.animation = `${transitionSpeed}s fadeout`;
-            volumeFill.style.animation = `${transitionSpeed}s fadeout`;
+        const transitionSpeed = 0.05;
+        if (thumb.style.opacity === "1") {
+            thumb.style.opacity = 0;
+            progressBar.style.animation = `${transitionSpeed}s fadeout`;
+            fill.style.animation = `${transitionSpeed}s fadeout`;
         }
         setTimeout(() => {
-            volumeThumb.style.opacity = 0;
-            volumeBar.style.opacity = 0;
-            volumeFill.style.opacity = 0;
-        }, 150);
+            progressBar.style.opacity = 0;
+            fill.style.opacity = 0;
+        }, transitionSpeed * 1000);
+        if (volumeThumb.style.opacity === "1") {
+            volumeFill.style.animation = `${transitionSpeed}s ease-in-out slideFill reverse`;
+            volumeBar.style.animation = `${transitionSpeed}s ease-in-out slideBar reverse`;
+            volumeThumb.style.animation = `${transitionSpeed}s ease-in-out slideLeftThumb reverse`;
+            volumeScrub.style.animation = `${transitionSpeed}s ease-in-out slideScrub`;
+
+            setTimeout(() => {
+                volumeFill.style.animation = "";
+                volumeThumb.style.animation = "";
+                volumeScrub.style.animation = "";
+                volumeFill.style.opacity = 0;
+                volumeBar.style.opacity = 0;
+                volumeThumb.style.opacity = 0;
+                volumeScrub.style.width = "0px";
+            }, transitionSpeed * 1000);
+        }
     }
 );
 
@@ -270,6 +420,48 @@ function showVolumeValue(value, vertical) {
     volumeSlider.style.height = (vertical ? bigval : 0) + "px";
     volumeSlider.style.width = (vertical ? 0 : bigval) + "px";
     volumeValue = value;
+
+    // `full` width => show all speaker concentric circles
+    // `half` width or less => show half circle
+    //  `zero` width => should diagonalslide animation, to signal silence
+    let slideSilent;
+    slideSilent = new Promise((resolve, reject) => {
+        if (value == "0") {
+            return resolve();
+        } else if (value !== "0" && silent === true) {
+            return reject()
+        }
+    });
+
+    slideSilent.then(() => {
+        const transitionSpeed = 0.2;
+        silenceSlide.style.animation = `${transitionSpeed}s diagonalslideout`;
+        silenceSlide.style.left = -6 * (20 / 64) + "px";
+        silenceSlide.style.top = 32 * (20 / 64) + "px";
+        silenceSlide.style.width = 100 * (20 / 64) + "px";
+        volumeThumb.style.left = "0px";
+        volumeFill.style.width = "0px";
+        silent = true;
+        setTimeout(function() {
+            silenceSlide.style.animation = "";
+        }, transitionSpeed * 1000);
+    }).catch(() => { // linking catch statements stops the console regurgitating your errors
+        const transitionSpeed = 0.2;
+        silenceSlide.style.animation = `${transitionSpeed}s diagonalslideout reverse`;
+        silenceSlide.style.left = 18 * (20 / 64) + "px";
+        silenceSlide.style.top = -2 * (20 / 64) + "px";
+        silenceSlide.style.width = "0px";
+
+        // default position of thumb, fill and value after silence is removed
+        volumeThumb.style.left = (48 / 100) * volumeValue + "px";
+        volumeFill.style.width = (54 / 100) * volumeValue + "px";
+        volumeSlider.value = `${volumeValue}`;
+        silent = false;
+        setTimeout(function() {
+            silenceSlide.style.animation = "";
+        }, transitionSpeed * 1000);
+    });
+
 }
 /* we often need a function to set the slider values on page load */
 function setVolumeValue(value, vertical) {
@@ -281,18 +473,22 @@ document.addEventListener('DOMContentLoaded', function() {
     setVolumeValue(100, false);
 })
 
-volumeSlider.addEventListener("click", () => {
-    console.log("listening to event")
+const settings = document.getElementById("settings");
+
+settings.addEventListener("click", () => {
+    console.log("should work");
     const transitionSpeed = 0.2;
-    if (silent) {
-        silent = false;
-        silenceSlide.style.animation = `${transitionSpeed}s diagonalslideout reverse`;
-        silenceSlide.style.left = 18 * (20 / 64) + "px";
-        silenceSlide.style.top = -2 * (20 / 64) + "px";
-        silenceSlide.style.width = "0px";
+    if (settings.style.transform === "rotate(30deg)") {
+        settings.style.animation = `${transitionSpeed}s rotate60clockwise reverse`;
+        settings.style.transform = "rotate(0deg)";
+        setTimeout(() => {
+            settings.style.animation = "";
+        }, transitionSpeed * 1000);
+    } else {
+        settings.style.animation = `${transitionSpeed}s rotate60clockwise`;
+        settings.style.transform = "rotate(30deg)";
+        setTimeout(() => {
+            settings.style.animation = "";
+        }, transitionSpeed * 1000);
     }
-    setTimeout(function() {
-        silenceSlide.style.animation = "";
-    }, transitionSpeed * 1000);
-    // setVolumeValue(100, false);
 });

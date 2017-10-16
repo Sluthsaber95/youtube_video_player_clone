@@ -283,7 +283,7 @@ button:focus {
             height: 6px;
             margin-left: 12px;
             margin-bottom: 5px;
-            width: 60px;
+            width: 0px;
             background-color: black;
             .bar {
                 position: absolute;
@@ -409,15 +409,34 @@ button:focus {
                 -webkit-appearance: none;
             }
         }
+        .playback-time {
+            font-family: 'Roboto', sans-serif;
+            // background-color: steelblue;
+            color: #DBD9D9;
+            width: 100px;
+            height: 38px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
         .empty-space {
             height: 40px;
             width: 250px;
+            #insanity-div {
+                height: 40px;
+                width: 100px;
+                background-color: blue;
+            }
         }
         .screening-controls {
             @extend .controls-triad;
-            float: right;
+            position: absolute;
+            left: 540px;
             .controls {
                 height: 18px;
+            }
+            #settings {
+                height: 20px;
             }
         }
     }
@@ -540,5 +559,14 @@ button:focus {
         top: calc((20*32px)/64);
         left: calc((20*-6px)/64);
         width: calc((20*100px)/64);
+    }
+}
+
+@keyframes rotate60clockwise {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(30deg);
     }
 }

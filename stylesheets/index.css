@@ -240,7 +240,7 @@ button:focus {
       height: 6px;
       margin-left: 12px;
       margin-bottom: 5px;
-      width: 60px;
+      width: 0px;
       background-color: black;
       /* slidershell exists only
             to provide a positioning context for the range input and other elements.*/
@@ -351,13 +351,28 @@ button:focus {
         border: 0 none;
         background: transparent;
         -webkit-appearance: none; }
+    .container .controls-bar .playback-time {
+      font-family: 'Roboto', sans-serif;
+      color: #DBD9D9;
+      width: 100px;
+      height: 38px;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
     .container .controls-bar .empty-space {
       height: 40px;
       width: 250px; }
+      .container .controls-bar .empty-space #insanity-div {
+        height: 40px;
+        width: 100px;
+        background-color: blue; }
     .container .controls-bar .screening-controls {
-      float: right; }
+      position: absolute;
+      left: 540px; }
       .container .controls-bar .screening-controls .controls {
         height: 18px; }
+      .container .controls-bar .screening-controls #settings {
+        height: 20px; }
 
 @keyframes fadein {
   from {
@@ -442,3 +457,9 @@ button:focus {
     top: calc((20*32px)/64);
     left: calc((20*-6px)/64);
     width: calc((20*100px)/64); } }
+
+@keyframes rotate60clockwise {
+  from {
+    transform: rotate(0deg); }
+  to {
+    transform: rotate(30deg); } }
