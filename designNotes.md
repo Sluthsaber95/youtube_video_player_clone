@@ -46,6 +46,18 @@ Aim: here is figure how to change a css keyframe
 
 When time was spent on prototyping the icons. Time should have been placed out to see what the animation and image even. At the appropriate scale, or one that this very similar to what is meant to cloned in the first place.
 
+### Naming
+
+Learning the exact name of the components you are using. And learn to name thing in a way where it reads like English.
+
+### Object Priority
+
+Some objects have priority over others, us this as a way of constructing cleaner designs.
+
+### Use Cases
+
+You can test things for use cases that's fine, a step up from that would be more practical to test them based off events. 
+
 ## Issues
 
 - Pause button, requires a redraw and effect remade

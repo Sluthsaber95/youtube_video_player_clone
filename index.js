@@ -64,6 +64,7 @@ const triangleBottom = document.getElementById("triangle-ascend");
 const leftBlock = document.getElementById("left");
 const rightBlock = document.getElementById("right");
 const pane = document.getElementById("ghost-pane");
+let videoPaused = true;
 
 pane.addEventListener("click", () => {
     if (leftBlock.style.width === "0px") {
@@ -71,10 +72,13 @@ pane.addEventListener("click", () => {
         const buttonWidth = "20px";
         const buttonHeight = "20px";
         const slowerSpeed = transitionSpeed * 1.5;
+
         triangleBottom.style.animation = `${slowerSpeed}s triangleBottomAppear`;
         triangleTop.style.animation = `${slowerSpeed}s triangleTopAppear`;
         leftBlock.style.animation = `${transitionSpeed}s blocksCombine`;
         rightBlock.style.animation = `${transitionSpeed}s blocksCombine`;
+        video.pause();
+        videoPaused = true;
         setTimeout(() => {
             leftBlock.style.width = buttonWidth;
             rightBlock.style.width = buttonWidth;
@@ -88,12 +92,30 @@ pane.addEventListener("click", () => {
         triangleTop.style.animation = `${transitionSpeed}s triangleTopDisappear`;
         leftBlock.style.animation = `${slowerSpeed}s blocksApart`;
         rightBlock.style.animation = `${slowerSpeed}s blocksApart`;
+        video.play();
+        videoPaused = false;
         setTimeout(() => {
             leftBlock.style.width = "0px";
             rightBlock.style.width = "0px";
             triangleBottom.style.borderBottom = "0px solid black";
             triangleTop.style.borderTop = "0px solid black";
         }, transitionSpeed * 1000);
+        const playBack = document.getElementById("playback-time");
+        const timeUpdated = new Promise((resolve, reject) => {
+            if (!videoPaused) {
+                return resolve();
+            }
+        });
+        let time;
+        timeUpdated.then(() => {
+            setInterval(() => {
+                time = Math.ceil(video.currentTime)
+                if (time <= 9) {
+                    time = `0${time}`;
+                }
+                playBack.innerHTML = `<h5>0:${time} / 00:12</h5>`;
+            }, 1000)
+        });
     }
 });
 
@@ -154,44 +176,68 @@ videoControls.addEventListener("mouseover", () => {
     }, 200);
 });
 
+
 function showValue(val, vertical) {
     /* setup variables for the elements of our slider */
-    var thumb = document.getElementById("thumb");
+    var thumb = document.getElementById("thumb"); //588px
     var shell = document.getElementById("shell");
     var slider = document.getElementById("slider");
+    const fill = document.getElementById("fill"); // 594px
 
     var pc = val / (slider.max - slider.min); /* the percentage slider value */
     var thumbsize = 12; // css => .sliderthumb {height: 12px}
     var bigval = 700; /* widest value*/
     var smallval = 10; /*shortest value */
-    var tracksize = bigval - thumbsize;
+    var tracksize = 688;
     var fillsize = 3;
 
-    var fill = document.getElementById("fill");
-    // centralises the the .sliderthumb along the fill line
-    fill.style.top = "4px";
-    // shifts left of container
-    fill.style.left = "4px";
-    fill.style.height = "4px";
-    progressBar.style.top = "4px";
-    progressBar.style.height = "4px";
+    // Update the seek bar as the video plays
+    video.addEventListener("timeupdate", function() {
 
+        if (!videoPaused) {
+            thumb.style.left = 688 * (video.currentTime / video.duration) + "px";
+            fill.style.width = 700 * (video.currentTime / video.duration) + "px";
+        }
+    });
 
-    var loc = vertical ? (1 - pc) * tracksize : pc * tracksize;
-    fill.style.width = loc + (thumbsize / 2) + "px";
+    const scrubberMoves = new Promise((resolve, reject) => {
+        if (val) {
+            console.log(val);
+            return resolve();
+        }
+    });
 
-    thumb.style.left = (vertical ? 0 : loc) + "px";
-    shell.style.height = (vertical ? bigval : 0) + "px";
-    shell.style.width = (vertical ? 0 : bigval) + "px";
+    scrubberMoves.then(() => {
+        // centralises the the .sliderthumb along the fill line
+        fill.style.top = "4px";
+        // shifts left of container
+        fill.style.left = "4px";
+        fill.style.height = "4px";
+        progressBar.style.top = "4px";
+        progressBar.style.height = "4px";
+
+        var loc = vertical ? (1 - pc) * tracksize : pc * tracksize;
+        fill.style.width = loc + (thumbsize / 2) + "px";
+
+        thumb.style.left = (vertical ? 0 : loc) + "px";
+        shell.style.height = (vertical ? bigval : 0) + "px";
+        shell.style.width = (vertical ? 0 : bigval) + "px";
+    });
 }
+
+
+
 /* we often need a function to set the slider values on page load */
 function setValue(val, vertical) {
     document.getElementById("slider").value = val;
     showValue(val, vertical);
 }
 
+
+
 document.addEventListener('DOMContentLoaded', function() {
-    setValue(100, false);
+    console.log(video.currentTime);
+    setValue(0, false);
 });
 
 const silence = document.getElementById("silence");
@@ -215,6 +261,7 @@ silenceSlide.addEventListener("click", () => {
         volumeThumb.style.left = "0px";
         volumeFill.style.width = "0px";
         volumeSlider.value = "0";
+        video.volume = 0;
         silent = true;
         setTimeout(function() {
             silenceSlide.style.animation = "";
@@ -229,6 +276,7 @@ silenceSlide.addEventListener("click", () => {
         volumeThumb.style.left = (48 / 100) * volumeValue + "px";
         volumeFill.style.width = (54 / 100) * volumeValue + "px";
         volumeSlider.value = `${volumeValue}`;
+        video.volume = volumeValue / 100;
         silent = false;
         setTimeout(function() {
             silenceSlide.style.animation = "";
@@ -247,6 +295,7 @@ silence.addEventListener("click", () => {
         volumeThumb.style.left = "0px";
         volumeFill.style.width = "0px";
         volumeSlider.value = "0";
+        video.volume = 0;
         silent = true;
         setTimeout(function() {
             silenceSlide.style.animation = "";
@@ -261,6 +310,7 @@ silence.addEventListener("click", () => {
         volumeThumb.style.left = (48 / 100) * volumeValue + "px";
         volumeFill.style.width = (54 / 100) * volumeValue + "px";
         volumeSlider.value = `${volumeValue}`;
+        video.volume = volumeValue / 100;
         silent = false;
         setTimeout(function() {
             silenceSlide.style.animation = "";
@@ -272,10 +322,10 @@ const volumeShell = document.getElementById("volume-shell");
 const volumeBar = document.getElementById("volume-bar");
 silence.addEventListener("mouseover", () => {
 
-    const scrubWidth = 60;
-    const barWidth = 60;
-    const thumbLeft = (54 / 100) * volumeValue;
-    const fillWidth = (60 / 100) * volumeValue;
+    const scrubWidth = 54;
+    const barWidth = 54;
+    const thumbLeft = (48 / 100) * volumeValue;
+    const fillWidth = (54 / 100) * volumeValue;
 
     const rules = [
         `
@@ -324,7 +374,6 @@ silence.addEventListener("mouseover", () => {
     // remove when a better solution is found
     const promise = new Promise((resolve, reject) => {
         if (style.sheet.cssRules.length) {
-            console.log(style.sheet.cssRules.length);
             return resolve();
         }
     });
@@ -362,8 +411,8 @@ silence.addEventListener("mouseover", () => {
             volumeScrub.style.animation = "";
             volumeBar.style.animation = "";
 
-            volumeScrub.style.width = 60 + "px";
-            volumeBar.style.width = 60 + "px";
+            volumeScrub.style.width = scrubWidth + "px";
+            volumeBar.style.width = barWidth + "px";
             volumeThumb.style.left = thumbLeft + "px";
             volumeFill.style.width = fillWidth + "px";
         }, transitionSpeed * 1000)
@@ -420,12 +469,11 @@ function showVolumeValue(value, vertical) {
     volumeSlider.style.height = (vertical ? bigval : 0) + "px";
     volumeSlider.style.width = (vertical ? 0 : bigval) + "px";
     volumeValue = value;
-
     // `full` width => show all speaker concentric circles
     // `half` width or less => show half circle
     //  `zero` width => should diagonalslide animation, to signal silence
-    let slideSilent;
-    slideSilent = new Promise((resolve, reject) => {
+    let slideSilent = new Promise((resolve, reject) => {
+        video.volume = volumeValue / 100;
         if (value == "0") {
             return resolve();
         } else if (value !== "0" && silent === true) {
@@ -476,19 +524,51 @@ document.addEventListener('DOMContentLoaded', function() {
 const settings = document.getElementById("settings");
 
 settings.addEventListener("click", () => {
-    console.log("should work");
     const transitionSpeed = 0.2;
-    if (settings.style.transform === "rotate(30deg)") {
-        settings.style.animation = `${transitionSpeed}s rotate60clockwise reverse`;
-        settings.style.transform = "rotate(0deg)";
-        setTimeout(() => {
-            settings.style.animation = "";
-        }, transitionSpeed * 1000);
-    } else {
+    if (settings.style.transform === "") {
         settings.style.animation = `${transitionSpeed}s rotate60clockwise`;
-        settings.style.transform = "rotate(30deg)";
         setTimeout(() => {
             settings.style.animation = "";
-        }, transitionSpeed * 1000);
+            settings.style.transform = "rotate(30deg)";
+            // usually it is set to 1000ms, however 900ms stops animation from a technical glitch
+        }, transitionSpeed * 900);
+    } else {
+        settings.style.animation = `${transitionSpeed}s rotate60clockwise reverse`;
+        setTimeout(() => {
+            settings.style.animation = "";
+            settings.style.transform = "";
+        }, transitionSpeed * 900);
+        // const container = document.getElementById("container");
+        // const mainDiv = document.createElement("div");
+        // const div = document.createElement("div");
+        // mainDiv.style["grid-area"] = "5/7/10/11";
+        // mainDiv.style.backgroundColor = "silver";
+        // mainDiv.style.width = "100%";
+        // mainDiv.style.height = "100%";
+        // // div.style.display = "flex";
+        // // div.style["align-items"] = "center";
+
+
+        // const innerDivs = [...Array(5)].map((e, i) => {
+        //     let subDiv = document.createElement("div");
+        //     if (i == 0) {
+        //         subDiv.style.height = "10px";
+        //         subDiv.style.width = "240px";
+        //         // subDiv.style.backgroundColor = "white";
+        //     } else {
+        //         subDiv.style.height = "45px";
+        //         subDiv.style.width = "240px";
+        //         subDiv.style.backgroundColor = "red";
+        //     }
+
+        //     subDiv.style.id = `subDiv-${i}`;
+        //     e = subDiv
+        //     div.appendChild(e);
+        // });
+        // container.appendChild(div);
+
+
+        // settings.style.animation = `${transitionSpeed}s rotate60clockwise reverse`;
+        // settings.style.transform = "rotate(0deg)";
     }
 });
