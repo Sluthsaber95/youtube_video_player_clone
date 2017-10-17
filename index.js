@@ -524,6 +524,10 @@ document.addEventListener('DOMContentLoaded', function() {
 const settings = document.getElementById("settings");
 
 settings.addEventListener("click", () => {
+    const changeVideoTime = () => {
+        video.currentTime = 5;
+    }
+    changeVideoTime();
     const transitionSpeed = 0.2;
     if (settings.style.transform === "") {
         settings.style.animation = `${transitionSpeed}s rotate60clockwise`;

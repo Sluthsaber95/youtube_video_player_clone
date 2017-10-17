@@ -7,7 +7,7 @@ body {
 .wrapper {
   height: 900px;
   width: 100%;
-  background-color: silver; }
+  background-color: white; }
 
 button {
   background-color: transparent;
@@ -154,10 +154,11 @@ button:focus {
     grid-row: 10/11;
     position: relative;
     width: 100%;
-    height: 40px;
+    height: 60px;
     display: flex;
-    align-items: center;
-    align-self: flex-end; }
+    align-items: flex-end;
+    align-self: flex-end;
+    background-color: rgba(0, 0, 0, 0.8); }
     .container .controls-bar .controls-triad, .container .controls-bar .screening-controls {
       margin-left: 20px;
       width: 120px;
@@ -171,16 +172,12 @@ button:focus {
       .container .controls-bar .controls-triad .test-play-toggle, .container .controls-bar .screening-controls .test-play-toggle {
         height: 20px;
         width: 20px;
-        display: flex;
         position: absolute;
-        border: 0;
-        padding: 0;
-        background-color: transparent; }
+        bottom: 10px;
+        display: flex; }
         .container .controls-bar .controls-triad .test-play-toggle #pause, .container .controls-bar .screening-controls .test-play-toggle #pause {
           height: 20px;
           width: 20px; }
-        .container .controls-bar .controls-triad .test-play-toggle #skip, .container .controls-bar .screening-controls .test-play-toggle #skip {
-          position: absolute; }
         .container .controls-bar .controls-triad .test-play-toggle .left-block, .container .controls-bar .screening-controls .test-play-toggle .left-block {
           position: absolute;
           left: 0;
@@ -212,11 +209,18 @@ button:focus {
         .container .controls-bar .controls-triad .test-play-toggle .ghost-cover, .container .controls-bar .screening-controls .test-play-toggle .ghost-cover {
           height: 20px;
           width: 20px; }
+      .container .controls-bar .controls-triad #skip-btn, .container .controls-bar .screening-controls #skip-btn {
+        position: absolute;
+        left: 70px;
+        bottom: 27px; }
+        .container .controls-bar .controls-triad #skip-btn #skip, .container .controls-bar .screening-controls #skip-btn #skip {
+          position: absolute; }
       .container .controls-bar .controls-triad .controls, .container .controls-bar .screening-controls .controls {
         height: 15px; }
       .container .controls-bar .controls-triad .test-volume, .container .controls-bar .screening-controls .test-volume {
         position: absolute;
         left: 120px;
+        bottom: 5px;
         height: calc((80px*20)/64);
         width: calc((80px*20)/64);
         display: flex;
@@ -236,7 +240,7 @@ button:focus {
     .container .controls-bar .casing-volume {
       height: 6px;
       margin-left: 12px;
-      margin-bottom: 5px;
+      margin-bottom: 18px;
       width: 0px;
       background-color: black;
       /* slidershell exists only
@@ -365,7 +369,8 @@ button:focus {
         background-color: blue; }
     .container .controls-bar .screening-controls {
       position: absolute;
-      left: 540px; }
+      left: 540px;
+      bottom: 10px; }
       .container .controls-bar .screening-controls .controls {
         height: 18px; }
       .container .controls-bar .screening-controls #settings {

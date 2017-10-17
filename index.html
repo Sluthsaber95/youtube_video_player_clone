@@ -14,17 +14,8 @@
     <div id="container" class="container">
         <div class="video-source">
             <video id="video" width="720" height="405">
-                <source src="C:\Users\Anthony\Desktop\web_dev_projects\youtube_video_player_clone\electricity_with_sfx.mp4" type="video/mp4">
+                <source src="C:\Users\Anthony\Desktop\web_dev_projects\youtube_video_player_clone\rick_morty.mp4" type="video/mp4">
             </video>
-        </div>
-        <div class="casing" id="scrub-case">
-            <div class="slidershell" id="shell">
-                <!-- progress is used instead of div, if future features are added -->
-                <progress id="progress-bar" value="0" max="100" class="bar"></progress>
-                <div class="sliderfill" id="fill"></div>
-                <div class="sliderthumb" id="thumb"></div>
-                <input class="slider-vertical" id="slider" type="range" min="0" max="100" value="0" oninput="showValue(value, false);" onchange="showValue(value, false);" />
-            </div>
         </div>
         <div id="video-controls" class="controls-bar">
             <div class="screen" id="video-screen"></div>
@@ -66,7 +57,9 @@
             <section class="empty-space"></section>
             <section class="screening-controls">
                 <section class="test-settings">
-                    <button id="settings-btn" class="controls">
+                    <button id="settings-btn" class="controls" onclick="() => {
+                            video.currentTime = 5;
+                        }">
                         <img id="settings" src="./assets/settings.png" alt="">
                     </button>
                 </section>
@@ -75,6 +68,15 @@
                     <img id="fullscreen-btn" class="controls" src="C:\Users\Anthony\Desktop\web_dev_projects\youtube_video_player_clone\assets\fullscreen.png" alt="fullscreen button">
                 </button>
             </section>
+        </div>
+        <div class="casing" id="scrub-case">
+            <div class="slidershell" id="shell">
+                <!-- progress is used instead of div, if future features are added -->
+                <progress id="progress-bar" value="0" max="100" class="bar"></progress>
+                <div class="sliderfill" id="fill"></div>
+                <div class="sliderthumb" id="thumb"></div>
+                <input class="slider-vertical" id="slider" type="range" min="0" max="100" value="0" oninput="showValue(value, false);" onchange="showValue(value, false);" />
+            </div>
         </div>
     </div>
 </body>
