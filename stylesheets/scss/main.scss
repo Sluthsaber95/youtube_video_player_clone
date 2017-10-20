@@ -1,0 +1,142 @@
+// iphone 5, iPhone 6s Aspect Ratio
+@media only screen and (min-width: 320px) and (max-width: 736px) and (orientation: portrait) {
+    .status {
+        height: 20px;
+        max-width: aspect-width(100vh);
+        background: color('grey');
+    }
+    .container {
+        .wrapper {
+            height: aspect-height(100vw);
+            max-width: inherit;
+            background: color('black--dark');
+        }
+        .wrapper {
+            .video {
+                height: inherit;
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 320px) and (max-width: 736px) and (orientation: landscape) {
+    .status {
+        height: 0px;
+        max-width: aspect-width(100vh);
+        background: none;
+    }
+    .container {
+        .wrapper {
+            height: aspect-height(100vw);
+            max-width: inherit;
+            background: color('black--dark');
+        }
+        .wrapper {
+            .video {
+                height: inherit;
+                width: 100%;
+            }
+        }
+    }
+}
+
+// Desktop and Tablet
+@media only screen and (min-width: 737px) and (max-width: 999px) {
+    body {
+        display: grid;
+    }
+    .status {
+        height: 60px;
+        min-width: 100%;
+        margin: 0 0 25px 0;
+        background: color('grey');
+    }
+    .flex-center {
+        display: flex;
+        justify-content: center;
+    }
+    .container {
+        height: aspect-ratio('small', 'height');
+        min-width: 100vh;
+    }
+    .container {
+        .wrapper {
+            height: aspect-ratio('small', 'height');
+            width: aspect-ratio('small', 'width');
+            background: color('black--dark');
+        }
+        .wrapper {
+            .video {
+                height: aspect-ratio('small', 'height');
+                width: aspect-ratio('small', 'width');
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1000px) and (max-width: 1365px) {
+    body {
+        display: grid;
+    }
+    .status {
+        height: 60px;
+        min-width: 100%;
+        margin: 0 0 25px 0;
+        background: color('grey');
+    }
+    .flex-center {
+        display: flex;
+        justify-content: center;
+    }
+    .container {
+        height: aspect-ratio('medium', 'height');
+        min-width: 100vh;
+    }
+    .container {
+        .wrapper {
+            height: aspect-ratio('medium', 'height');
+            width: aspect-ratio('medium', 'width');
+            background: color('black--dark');
+        }
+        .wrapper {
+            .video {
+                height: aspect-ratio('medium', 'height');
+                width: aspect-ratio('medium', 'width');
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 1366px) {
+    body {
+        display: grid;
+    }
+    .status {
+        height: 60px;
+        min-width: 100%;
+        margin: 0 0 25px 0;
+        background: color('grey');
+    }
+    .flex-center {
+        display: flex;
+        justify-content: center;
+    }
+    .container {
+        height: aspect-ratio('medium', 'height');
+        min-width: 100vh;
+    }
+    .container {
+        .wrapper {
+            height: aspect-ratio('medium', 'height');
+            width: aspect-ratio('medium', 'width');
+            background: color('black--dark');
+        }
+        .wrapper {
+            .video {
+                height: aspect-ratio('medium', 'height');
+                width: aspect-ratio('medium', 'width');
+            }
+        }
+    }
+}

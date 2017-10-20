@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "scss": "node-sass --watch index.scss -o stylesheets/"
+        "scss": "node-sass --watch ./stylesheets/scss/app.scss -o stylesheets/css"
     },
     "repository": {
         "type": "git",
@@ -20,5 +20,6 @@
     "homepage": "https://github.com/anthonytranDev/youtube_video_player_clone#readme",
     "dependencies": {
         "node-sass": "^4.5.3"
-    }
+    },
+    "devDependencies": {}
 }

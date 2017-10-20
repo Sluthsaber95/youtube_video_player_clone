@@ -1,0 +1,82 @@
+/*------------------------------------*\
+  # UTILITIES
+\*------------------------------------*/
+
+
+/**
+ * TABLE OF CONTENTS
+ *
+ *
+ *
+ */
+
+// functions
+@function quarter($inuit-number) {
+    @return round($inuit-number / 4);
+}
+
+@function halve($inuit-number) {
+    @return round($inuit-number / 2);
+}
+
+@function double($inuit-number) {
+    @return round($inuit-number * 2);
+}
+
+@function quadruple($inuit-number) {
+    @return round($inuit-number * 4);
+}
+
+@function aspect-height($screen-width) {
+    @return round($screen-width * (9/16));
+}
+
+@function aspect-width($screen-height) {
+    @return round($screen-height * (16/9));
+}
+
+
+/**
+ * returns color hash from site pallete
+**/
+
+@function color($color) {
+    @return map-get($pallete, $color);
+}
+
+
+/**
+ * returns the aspect-ratio size hash
+ * must specify either width/height
+**/
+
+@function aspect-ratio($size, $dimension) {
+    @if($size=='small') {
+        @return map-get($small-aspect-ratio, $dimension);
+    }
+    @else if($size=='medium') {
+        @return map-get($medium-aspect-ratio, $dimension);
+    }
+    @else if($size=='large') {
+        @return map-get($large-aspect-ratio, $dimension);
+    }
+}
+
+// mixins
+
+/**
+ * set height and width of element.
+**/
+
+@mixin size($width, $height: $width) {
+    height: $height;
+    width: $width;
+}
+
+@mixin font($font) {
+    font-family: map-get($font-families, $font);
+    font-weight: map-get($font-weights, $font);
+    @if($font=='main-italic') {
+        font-style: italic;
+    }
+}

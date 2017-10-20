@@ -1,0 +1,195 @@
+@import url("https://fonts.googleapis.com/css?family=Raleway:100,300i,400,900");
+/*------------------------------------*  # UTILITIES
+\*------------------------------------*/
+/**
+ * TABLE OF CONTENTS
+ *
+ *
+ *
+ */
+/**
+ * returns color hash from site pallete
+**/
+/**
+ * returns the aspect-ratio size hash
+ * must specify either width/height
+**/
+/**
+ * set height and width of element.
+**/
+body {
+  margin: 0; }
+
+h1 {
+  font-size: 3.815em; }
+
+h2 {
+  font-size: 3.052em; }
+
+h3 {
+  font-size: 2.441em; }
+
+h4 {
+  font-size: 1.953em; }
+
+h5 {
+  font-size: 1.563em; }
+
+h6 {
+  font-size: 1.25rem; }
+
+p {
+  margin: 0 0 halve(24px); }
+
+a {
+  text-decoration: none;
+  color: #3990af; }
+  a:active, a:focus, a:hover {
+    text-decoration: underline;
+    color: #4acb9f; }
+  a:visited {
+    color: #3990af; }
+
+small {
+  font-size: 0.8em; }
+
+strong {
+  font-weight: 900; }
+
+blockquote {
+  font-family: Raleway;
+  font-weight: 300;
+  font-style: italic;
+  margin: halve(24px) 24px;
+  padding: halve(24px) 24px;
+  line-height: 1.4;
+  text-align: left;
+  color: black;
+  border-left: #323234 5px solid; }
+  blockquote.dark {
+    color: #FFFFFF;
+    border-left: #FFFFFF 5px solid; }
+    blockquote.dark cite {
+      color: #FFFFFF; }
+  blockquote cite {
+    color: #323234;
+    font-size: 90%;
+    display: block;
+    margin-top: 5px; }
+    blockquote cite:before {
+      content: "\2014 \2009"; }
+
+hr {
+  border: none;
+  border-top: medium double #FFFFFF; }
+  hr.dark {
+    border-top: medium double #19191a; }
+
+em {
+  font-style: italic; }
+
+mark {
+  position: relative;
+  background: none; }
+  mark:before {
+    content: "";
+    position: absolute;
+    top: 0%;
+    left: -5%;
+    width: 110%;
+    height: 110%;
+    transform: rotate(-1deg);
+    background: #4acb9f;
+    z-index: -1; }
+
+@media only screen and (min-width: 320px) and (max-width: 736px) and (orientation: portrait) {
+  .status {
+    height: 20px;
+    max-width: 178vh;
+    background: #ecece9; }
+  .container .wrapper {
+    height: 56vw;
+    max-width: inherit;
+    background: black; }
+  .container .wrapper .video {
+    height: inherit;
+    width: 100%; } }
+
+@media only screen and (min-width: 320px) and (max-width: 736px) and (orientation: landscape) {
+  .status {
+    height: 0px;
+    max-width: 178vh;
+    background: none; }
+  .container .wrapper {
+    height: 56vw;
+    max-width: inherit;
+    background: black; }
+  .container .wrapper .video {
+    height: inherit;
+    width: 100%; } }
+
+@media only screen and (min-width: 737px) and (max-width: 999px) {
+  body {
+    display: grid; }
+  .status {
+    height: 60px;
+    min-width: 100%;
+    margin: 0 0 25px 0;
+    background: #ecece9; }
+  .flex-center {
+    display: flex;
+    justify-content: center; }
+  .container {
+    height: 320px;
+    min-width: 100vh; }
+  .container .wrapper {
+    height: 320px;
+    width: 568px;
+    background: black; }
+  .container .wrapper .video {
+    height: 320px;
+    width: 568px; } }
+
+@media only screen and (min-width: 1000px) and (max-width: 1365px) {
+  body {
+    display: grid; }
+  .status {
+    height: 60px;
+    min-width: 100%;
+    margin: 0 0 25px 0;
+    background: #ecece9; }
+  .flex-center {
+    display: flex;
+    justify-content: center; }
+  .container {
+    height: 480px;
+    min-width: 100vh; }
+  .container .wrapper {
+    height: 480px;
+    width: 854px;
+    background: black; }
+  .container .wrapper .video {
+    height: 480px;
+    width: 854px; } }
+
+@media only screen and (min-width: 1366px) {
+  body {
+    display: grid; }
+  .status {
+    height: 60px;
+    min-width: 100%;
+    margin: 0 0 25px 0;
+    background: #ecece9; }
+  .flex-center {
+    display: flex;
+    justify-content: center; }
+  .container {
+    height: 480px;
+    min-width: 100vh; }
+  .container .wrapper {
+    height: 480px;
+    width: 854px;
+    background: black; }
+  .container .wrapper .video {
+    height: 480px;
+    width: 854px; } }
