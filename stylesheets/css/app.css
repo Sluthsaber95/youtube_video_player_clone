@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css?family=Raleway:100,300i,400,900");
 @import url("https://fonts.googleapis.com/css?family=Roboto");
 /*------------------------------------*  # UTILITIES
 \*------------------------------------*/
@@ -164,6 +163,10 @@ input[type=range]::-ms-thumb {
 .volume-bar::-ms-thumb {
   background: #FFFFFF; }
 
+div:-webkit-full-screen {
+  height: 100vh;
+  width: 100vw; }
+
 @media only screen and (min-width: 320px) and (max-width: 736px) and (orientation: portrait) {
   .status {
     height: 20px;
@@ -290,8 +293,14 @@ input[type=range]::-ms-thumb {
     grid-area: 10/1/11/9;
     width: 75vw;
     height: 3px;
-    margin: 0 0 0 45px;
+    margin: 7px 0 0 45px;
     background: #ecece9; }
+  .container .wrapper .video-controls .progress {
+    grid-area: 10/1/11/9;
+    width: 0vw;
+    height: 3px;
+    margin: 7px 0 0 45px;
+    background: red; }
   .container .wrapper .video-controls .back {
     grid-area: 4/3/7/5; }
     .container .wrapper .video-controls .back img {
@@ -318,8 +327,6 @@ input[type=range]::-ms-thumb {
       height: 15px; } }
 
 @media only screen and (min-width: 737px) and (max-width: 999px) {
-  body {
-    display: grid; }
   .status {
     height: 60px;
     min-width: 100%;
@@ -413,8 +420,6 @@ input[type=range]::-ms-thumb {
       height: 20px; } }
 
 @media only screen and (min-width: 1000px) and (max-width: 1920px) {
-  body {
-    display: grid; }
   .status {
     height: 60px;
     min-width: 100%;
@@ -427,7 +432,6 @@ input[type=range]::-ms-thumb {
     height: 480px;
     min-width: 100vh; }
   .container .wrapper {
-    grid-area: 1/1/11/11;
     height: 480px;
     width: 854px;
     background: black;

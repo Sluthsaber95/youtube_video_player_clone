@@ -76,6 +76,11 @@ input[type=range]::-ms-thumb {
     background: color('white');
 }
 
+div:-webkit-full-screen {
+    height: 100vh;
+    width: 100vw;
+}
+
 // button {
 //     background: grey;
 // }
@@ -252,8 +257,15 @@ input[type=range]::-ms-thumb {
                     grid-area: 10/1/11/9;
                     width: 75vw;
                     height: 3px;
-                    margin: 0 0 0 45px;
+                    margin: 7px 0 0 45px;
                     background: color('grey');
+                }
+                .progress {
+                    grid-area: 10/1/11/9;
+                    width: 0vw;
+                    height: 3px;
+                    margin: 7px 0 0 45px;
+                    background: color('main');
                 }
                 .back {
                     grid-area: 4/3/7/5;
@@ -296,9 +308,6 @@ input[type=range]::-ms-thumb {
 
 // Desktop and Tablet
 @media only screen and (min-width: 737px) and (max-width: 999px) {
-    body {
-        display: grid;
-    }
     .status {
         height: 60px;
         min-width: 100%;
@@ -427,9 +436,6 @@ input[type=range]::-ms-thumb {
 }
 
 @media only screen and (min-width: 1000px) and (max-width: 1920px) {
-    body {
-        display: grid;
-    }
     .status {
         height: 60px;
         min-width: 100%;
@@ -446,7 +452,6 @@ input[type=range]::-ms-thumb {
     }
     .container {
         .wrapper {
-            grid-area: 1/1/11/11;
             height: aspect-ratio('medium', 'height');
             width: aspect-ratio('medium', 'width');
             background: color('black--dark');

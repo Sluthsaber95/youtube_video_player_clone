@@ -7,6 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="stylesheets/css/app.css" rel="stylesheet">
     <link href="stylesheets/css/normalize.css" rel="stylesheet">
+    <script>
+        document.addEventListener("keypress",
+            function(e) {
+                console.log(e.keyCode);
+            });
+    </script>
 </head>
 
 <body>
@@ -14,18 +20,14 @@
     <!-- Tablets and Desktop Devices: status-bar represents the top area of YouTube website -->
     <section class="status" id="status-bar"></section>
     <section class="flex-center container">
-        <section class="wrapper">
+        <section class="wrapper" id="wrapper">
             <video class="video" id="video" src=".\assets\video\rick_morty.mp4">
-                <p>
-                    Your browser doesn't support HTML5 video.
-                    <a href="">Download</a> the video instead.
-                  </p>
             </video>
             <section class="video-controls" id="video-controls">
                 <div class="main-screen" id="main-screen"></div>
                 <!-- Seek-time displayed here is for desktop -->
                 <div class="time-duration" id="time-duration">
-                    0:00 / 0:11
+                    0:00 / 0:10
                 </div>
                 <!-- seek-time displayed mobile phone only-->
                 <div class="seek-time" id="seek-time">
@@ -33,9 +35,10 @@
                 </div>
                 <!-- duration mobile phone only -->
                 <div class="duration" id="duration">
-                    0:11
+                    0:10
                 </div>
                 <input class="seek-bar" id="seek-bar" type="range" value="0">
+                <div class="progress" id="progress"></div>
                 <button class="back" type="button" id="back">
                     <img src=".\assets\img\back.png" alt="">
                 </button>

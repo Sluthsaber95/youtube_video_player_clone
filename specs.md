@@ -33,6 +33,14 @@ As a user;
 
 Issues found
 
++ Full-screen mode for webkit doesn't work if css-grid is implement; only for Mozilla
+    + SOLUTIONS TRIED:
+    + Tried to have an event listen for an "esc" key, so that I can trigger a promise object that can listen in for when the `document.webkitIsFullScreen` is toggled to false. So that I can
+    change the wrapper display from block to grid
+    Promise = 'pending' => esc triggered => document.webkitIsFullScreen = false => wrapper.style.display = "grid";
+
+Issues Solved
+
 + Full-screen mode still implement native browser video player capabilities
     + SOLUTION USED: Shadow DOM and interacting with Pseudo-classes which can be implemented   
     https://css-tricks.com/custom-controls-in-html5-video-full-screen/#article-header-id-1
