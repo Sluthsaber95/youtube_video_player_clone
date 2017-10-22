@@ -30,7 +30,7 @@ define(["./state", "./constant"], function(state, constant) {
 
             seconds = setInterval(() => {
                 //Timer
-                time = Math.ceil(video.currentTime)
+                time = Math.floor(video.currentTime)
                 if (time <= 9) {
                     time = `0${time}`;
                 }

@@ -2,6 +2,7 @@ const duration = document.getElementById("duration");
 const fullScreenButton = document.getElementById("full-screen");
 const muteButton = document.getElementById("mute");
 const playButton = document.getElementById("play-pause");
+const progress = document.getElementById("progress");
 const timeDuration = document.getElementById("time-duration");
 const seekBar = document.getElementById("seek-bar");
 const seekTime = document.getElementById("seek-time");
@@ -15,6 +16,7 @@ define(function() {
         fullScreenButton,
         muteButton,
         playButton,
+        progress,
         timeDuration,
         seekBar,
         seekTime,

@@ -11,6 +11,7 @@ requirejs.config({
     }
 });
 // Start the main app logic.
+
 requirejs(['action', 'component', 'constant', 'state'],
     function(action, component, constant, state) {
 
@@ -90,6 +91,27 @@ requirejs(['action', 'component', 'constant', 'state'],
         seekBar.addEventListener("mouseup", function() {
             video.play();
         });
+        // Event listener for the seek bar
+        seekBar.addEventListener("change", function() {
+            // Calculate the new time
+            var time = video.duration * (seekBar.value / 100);
+
+            // Update the video time
+            video.currentTime = time;
+            setTimeout(() => {
+                console.log(seekBar.value);
+            })
+        });
+        // Update the seek bar as the video plays
+        video.addEventListener("timeupdate", function() {
+            // Calculate the slider value
+            var value = (video.currentTime / video.duration) * 100;
+
+            // Update the slider value
+            constant.progress.style.width = (video.currentTime / video.duration) * 75 + "vw";
+            seekBar.value = (video.currentTime / video.duration) * 100;;
+        });
+
         // Event listener for the mute button
         muteButton.addEventListener("click", function() {
             if (video.muted == false) {
@@ -103,28 +125,9 @@ requirejs(['action', 'component', 'constant', 'state'],
                 video.muted = false;
             }
         });
-        // Event listener for the seek bar
-        seekBar.addEventListener("change", function() {
-            // Calculate the new time
-            var time = video.duration * (seekBar.value / 100);
-
-            // Update the video time
-            video.currentTime = time;
-        });
-        // Update the seek bar as the video plays
-        video.addEventListener("timeupdate", function() {
-            // Calculate the slider value
-            var value = (100 / video.duration) * video.currentTime;
-
-            // Update the slider value
-            seekBar.value = value;
-        });
         // Event listener for the volume bar
         volumeBar.addEventListener("change", function() {
             // Update the video volume
             video.volume = volumeBar.value;
         });
-        // Displays the timer 
-
-        console.log(state.device);
     });
