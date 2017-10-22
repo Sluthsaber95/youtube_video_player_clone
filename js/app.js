@@ -13,8 +13,19 @@ requirejs.config({
 // Start the main app logic.
 requirejs(['action', 'component', 'constant', 'state'],
     function(action, component, constant, state) {
-        // Fired for full screen Mobile Devices
 
+        mainScreen.addEventListener("click", () => {
+
+            if (setState.isPlaying) {
+                setState.isPlaying = false;
+                action.timing();
+            } else {
+                setState.isPlaying = true;
+                action.timing();
+            }
+
+        });
+        // Fired for full screen Mobile Devices
         const orientationChanged = new Promise((resolve, reject) => {
             if (window.matchMedia("(orientation: landscape)").matches && state.device === "mobile") {
                 resolve();
@@ -61,20 +72,13 @@ requirejs(['action', 'component', 'constant', 'state'],
 
         // Event listener for the play/pause button
         playButton.addEventListener("click", function() {
-            if (video.paused == true) {
-                video.play();
-                setState.isPlaying = true;
-                playButton.innerHTML = "";
-                const image = document.createElement("img");
-                image.src = "./assets/img/pause.png";
-                playButton.appendChild(image);
-            } else {
-                video.pause();
+            if (setState.isPlaying) {
                 setState.isPlaying = false;
-                playButton.innerHTML = "";
-                const image = document.createElement("img");
-                image.src = "./assets/img/play.png";
-                playButton.appendChild(image);
+                action.timing();
+            } else { //pause
+                video.pause();
+                setState.isPlaying = true;
+                action.timing();
             }
         });
         // Pause the video when the slider handle is being dragged
@@ -121,8 +125,6 @@ requirejs(['action', 'component', 'constant', 'state'],
             video.volume = volumeBar.value;
         });
         // Displays the timer 
-        video.addEventListener("timeupdate", timing, false);
 
-        // video.removeEventListener("timeupdate", timing);
-
+        console.log(state.device);
     });

@@ -8,7 +8,6 @@ As a user;
 + While the video is pause, I want scrub forward and backwards at specified points of the video
 + I want to Pause and Play the video, via the Play/Pause button 
 + I want to Pause and Play the video, by clicking on the screen
-+ I want to replay the same video
 
 ### Volume
 + I want to mute and unmute my video
@@ -32,15 +31,11 @@ As a user;
 ### Abstraction
 + I want all the controls removed from sight, whilst the video is being played
 
-### Mobile Capabilities
-+ I want to view the video player on my phone
-
-#Issues found
+Issues found
 
 + Full-screen mode still implement native browser video player capabilities
-    + Shadow DOM and interacting with Pseudo-classes which can be implemented   
+    + SOLUTION USED: Shadow DOM and interacting with Pseudo-classes which can be implemented   
     https://css-tricks.com/custom-controls-in-html5-video-full-screen/#article-header-id-1
     + Worse comes to worse, just position the custom controls over the native ones
     + Best Practice Solution - When you apply fullscreen mode, are you applying it to the VIDEO element? If so, that’s the problem — if you wrap the VIDEO in a container DIV and then apply fullscreen to that container, then it all works as expected, in all browsers that support fullscreen mode (i.e. recent versions of Chrome, Safari, Firefox and Opera).
     Author James Edwards 
-+ Unable to force mobile device into landscape when pushing the Fullscreen mode on Phone

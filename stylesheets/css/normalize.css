@@ -364,8 +364,9 @@ button:-moz-focusring,
 
 input[type=range] {
     -webkit-appearance: none;
+    -moz-appearance: none;
     /* Specific width is required for Firefox. */
-    background: transparent;
+    background: white;
     /* Otherwise white in Chrome */
 }
 
