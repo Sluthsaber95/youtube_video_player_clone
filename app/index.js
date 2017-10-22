@@ -100,9 +100,11 @@ pane.addEventListener("click", () => {
             triangleBottom.style.borderBottom = "0px solid black";
             triangleTop.style.borderTop = "0px solid black";
         }, transitionSpeed * 1000);
-        const playBack = document.getElementById("playback-time");
+
+
+        console.log(setState.isPlaying);
         const timeUpdated = new Promise((resolve, reject) => {
-            if (!videoPaused) {
+            if (setState.isPlaying) {
                 return resolve();
             }
         });

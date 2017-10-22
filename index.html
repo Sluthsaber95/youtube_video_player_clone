@@ -15,18 +15,42 @@
     <section class="status" id="status-bar"></section>
     <section class="flex-center container">
         <section class="wrapper">
-            <video class="video" id="video" src=".\app\assets\video\rick_morty.mp4">
+            <video class="video" id="video" src=".\assets\video\rick_morty.mp4">
                 <p>
                     Your browser doesn't support HTML5 video.
                     <a href="">Download</a> the video instead.
                   </p>
             </video>
             <section class="video-controls">
+                <!-- Seek-time displayed here is for desktop -->
+                <div class="time-duration" id="time-duration">
+                    0:00 / 0:11
+                </div>
+                <!-- seek-time displayed mobile phone only-->
+                <div class="seek-time" id="seek-time">
+                    0:00
+                </div>
+                <!-- duration mobile phone only -->
+                <div class="duration" id="duration">
+                    0:11
+                </div>
                 <input class="seek-bar" id="seek-bar" type="range" value="0">
-                <button type="button" id="play-pause">Play</button>
-                <button type="button" id="mute">Mute</button>
-                <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
-                <button type="button" id="full-screen">Full-Screen</button>
+                <button class="back" type="button" id="back">
+                    <img src=".\assets\img\back.png" alt="">
+                </button>
+                <button class="play-pause" type="button" id="play-pause">
+                    <img src=".\assets\img\play.png" alt="">
+                </button>
+                <button class="skip" type="button" id="skip">
+                    <img src=".\assets\img\skip.png" alt="">
+                </button>
+                <button class="mute" type="button" id="mute">
+                        <img src=".\assets\img\volume.png" alt="">
+                </button>
+                <input style="background: white" class="volume-bar" type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
+                <button class="full-screen" type="button" id="full-screen">
+                    <img src=".\assets\img\fullscreen.png" alt="">
+                </button>
             </section>
         </section>
     </section>

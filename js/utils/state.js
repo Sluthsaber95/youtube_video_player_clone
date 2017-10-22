@@ -1,7 +1,15 @@
-// This is the main state tree where all the state is managed
-const state = {
+const setState = {
     isPlaying: false,
-    // value,
-    // speed,
-    // left
-};
+    orientation: "landscape"
+}
+
+define(["./device"], function(device) {
+    return {
+        isPlaying: setState.isPlaying,
+        orientation: setState.orientation,
+        device: deviceParser(navigator.userAgent)
+            // value,
+            // speed,
+            // left
+    }
+});

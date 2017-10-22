@@ -19,6 +19,7 @@
     },
     "homepage": "https://github.com/anthonytranDev/youtube_video_player_clone#readme",
     "dependencies": {
+        "device": "^0.3.8",
         "node-sass": "^4.5.3"
     },
     "devDependencies": {}

@@ -4,7 +4,7 @@ $small-aspect-ratio: ('width': 568px, 'height': 320px);
 $medium-aspect-ratio: ('width': 854px, 'height': 480px);
 $large-aspect-ratio: ('width': 1280px, 'height': 720px);
 // modify these to alter base colour set
-$base-pallete: ( 'main': #b04632, // red
+$base-pallete: ( 'main': red, // red
 'secondary': #54a9c7, // blue
 'accent': #4acb9f, // green
 'white': #FFFFFF, 'black': #19191a, 'grey': #ecece9 // this may need to be reworked for more options
@@ -22,6 +22,7 @@ $spacing--large: double($spacing-base-unit);
 $spacing--xlarge: quadruple($spacing-base-unit);
 // fonts
 @import url('https://fonts.googleapis.com/css?family=Raleway:100,300i,400,900');
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 $font-base: 1em;
 $font-families: ( 'main': Raleway,
 'main-light': Raleway,
@@ -34,19 +35,35 @@ $font-weights: ( 'main': 400,
 'main-bold': 900,
 );
 $pallete: ( // main base colour
-'main': map-get($base-pallete, 'main'),
-'main--light': lighten(map-get($base-pallete, 'main'), $color-variation--light),
-'main--dark': darken(map-get($base-pallete, 'main'), $color-variation--dark), // complementary secondary colour
-'secondary': map-get($base-pallete, 'secondary'),
-'secondary--light': lighten(map-get($base-pallete, 'secondary'), $color-variation--light),
-'secondary--dark': darken(map-get($base-pallete, 'secondary'), $color-variation--dark), // accent colour - links, highlights etc
-'accent': map-get($base-pallete, 'accent'),
-'accent--light': lighten(map-get($base-pallete, 'accent'), $color-variation--light),
-'accent--dark': darken(map-get($base-pallete, 'accent'), $color-variation--dark),
-'white': map-get($base-pallete, 'white'), // blacks/ dark greys
-'black': map-get($base-pallete, 'black'),
-'black--light': lighten(map-get($base-pallete, 'black'), $color-variation--light),
-'black--dark': darken(map-get($base-pallete, 'black'), $color-variation--dark), // greys TODO: maybe lighten these a little
-'grey': map-get($base-pallete, 'grey'),
-'grey--light': lighten(map-get($base-pallete, 'grey'), $color-variation--light),
-'grey--dark': darken(map-get($base-pallete, 'grey'), $color-variation--dark));
+'main': map-get($base-pallete,
+'main'),
+'main--light': lighten(map-get($base-pallete, 'main'),
+$color-variation--light),
+'main--dark': darken(map-get($base-pallete, 'main'),
+$color-variation--dark), // complementary secondary colour
+'secondary': map-get($base-pallete,
+'secondary'),
+'secondary--light': lighten(map-get($base-pallete, 'secondary'),
+$color-variation--light),
+'secondary--dark': darken(map-get($base-pallete, 'secondary'),
+$color-variation--dark), // accent colour - links, highlights etc
+'accent': map-get($base-pallete,
+'accent'),
+'accent--light': lighten(map-get($base-pallete, 'accent'),
+$color-variation--light),
+'accent--dark': darken(map-get($base-pallete, 'accent'),
+$color-variation--dark),
+'white': map-get($base-pallete,
+'white'), // blacks/ dark greys
+'black': map-get($base-pallete,
+'black'),
+'black--light': lighten(map-get($base-pallete, 'black'),
+$color-variation--light),
+'black--dark': darken(map-get($base-pallete, 'black'),
+$color-variation--dark), // greys TODO: maybe lighten these a little
+'grey': map-get($base-pallete,
+'grey'),
+'grey--light': lighten(map-get($base-pallete, 'grey'),
+$color-variation--light),
+'grey--dark': darken(map-get($base-pallete, 'grey'),
+$color-variation--dark));
